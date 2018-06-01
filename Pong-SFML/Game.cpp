@@ -1,7 +1,7 @@
 #include "Game.h"
 #include <SFML\Graphics.hpp>
 
-sf::RenderWindow Game::window(sf::VideoMode(200, 200), "SFML works!", sf::Style::Close);
+sf::RenderWindow Game::window(sf::VideoMode(640, 480), "SFML works!", sf::Style::Close);
 
 Game::Game()
 {
@@ -26,6 +26,11 @@ void Game::HandleEvents()
 		if (event.type == sf::Event::Closed)
 			window.close();
 	}
+}
+
+void Game::PutOnWindow(Entity* entity)
+{
+	entity->Draw(&window);
 }
 
 void Game::Draw()

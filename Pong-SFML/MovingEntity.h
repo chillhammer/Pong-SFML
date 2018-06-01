@@ -13,7 +13,8 @@ public:
 protected:
 	sf::Vector2f acceleration;
 	sf::Vector2f velocity;
-	float maxSpeed;
+	float maxSpeed; //must set to move
+	float friction;
 	
 	void MoveBasedOnVelocity();
 };

@@ -12,6 +12,8 @@ int main()
 	{
 		Game::HandleEvents();
 
+		EntMgr.UpdateAll();
+
 		Game::Draw();
 	}
 

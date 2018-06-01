@@ -7,5 +7,7 @@ public:
 	Paddle();
 	virtual ~Paddle();
 	virtual void Update();
+private:
+	float accSpeed;
 };
 

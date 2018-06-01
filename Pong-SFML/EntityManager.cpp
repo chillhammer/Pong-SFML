@@ -1,4 +1,5 @@
 #include "EntityManager.h"
+#include "Game.h"
 
 
 EntityManager::EntityManager() : entities()
@@ -21,7 +22,7 @@ void EntityManager::UpdateAll()
 void EntityManager::DrawAll()
 {
 	for (Entity* entity : entities) {
-		entity->Draw();
+		Game::PutOnWindow(entity);
 	}
 }
 

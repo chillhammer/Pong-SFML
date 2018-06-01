@@ -3,6 +3,7 @@
 
 namespace sf {
 	class Shape;
+	class RenderWindow;
 }
 class Entity
 {
@@ -12,7 +13,7 @@ public:
 	virtual ~Entity();
 
 	virtual void Update() = 0;
-	virtual void Draw();
+	virtual void Draw(sf::RenderWindow*);
 
 protected:
 	sf::Shape* shape;
