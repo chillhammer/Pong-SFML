@@ -6,7 +6,7 @@ class Paddle :
 public:
 	Paddle();
 	virtual ~Paddle();
-	virtual void Update();
+	virtual void Update(float);
 private:
 	float accSpeed;
 };

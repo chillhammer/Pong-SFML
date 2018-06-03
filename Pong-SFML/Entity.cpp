@@ -9,6 +9,16 @@ Entity::~Entity()
 {
 }
 
+void Entity::setPosition(float x, float y)
+{
+	shape->setPosition(x, y);
+}
+
+void Entity::setPosition(sf::Vector2f newPos)
+{
+	shape->setPosition(newPos);
+}
+
 void Entity::Draw(sf::RenderWindow* window)
 {
 	//TODO: Put onto window;

@@ -9,13 +9,13 @@ public:
 	MovingEntity();
 	MovingEntity(sf::Shape* s) : Entity(s) {};
 	virtual ~MovingEntity();
-	virtual void Update() = 0;
+	virtual void Update(float) = 0;
 protected:
 	sf::Vector2f acceleration;
 	sf::Vector2f velocity;
 	float maxSpeed; //must set to move
 	float friction;
 	
-	void MoveBasedOnVelocity();
+	void MoveBasedOnVelocity(float);
 };
 

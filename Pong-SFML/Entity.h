@@ -1,6 +1,6 @@
 
 #pragma once
-
+#include <SFML\System\Vector2.hpp>
 namespace sf {
 	class Shape;
 	class RenderWindow;
@@ -11,8 +11,10 @@ public:
 	Entity();
 	Entity(sf::Shape* s) : shape(s) {};
 	virtual ~Entity();
+	void setPosition(float, float);
+	void setPosition(sf::Vector2f);
 
-	virtual void Update() = 0;
+	virtual void Update(float) = 0;
 	virtual void Draw(sf::RenderWindow*);
 
 protected:

@@ -1,7 +1,10 @@
 #include "Game.h"
 #include <SFML\Graphics.hpp>
 
-sf::RenderWindow Game::window(sf::VideoMode(640, 480), "SFML works!", sf::Style::Close);
+const int Game::HEIGHT = 480;
+const int Game::WIDTH  = 640;
+
+sf::RenderWindow Game::window(sf::VideoMode(Game::WIDTH, Game::HEIGHT), "Pong!", sf::Style::Close);
 
 Game::Game()
 {

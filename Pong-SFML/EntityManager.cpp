@@ -12,10 +12,10 @@ void EntityManager::Add(Entity * entity)
 	entities.push_back(entity);
 }
 
-void EntityManager::UpdateAll()
+void EntityManager::UpdateAll(float deltaTime)
 {
 	for (Entity* entity : entities) {
-		entity->Update();
+		entity->Update(deltaTime);
 	}
 }
 

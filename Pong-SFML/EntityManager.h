@@ -11,7 +11,7 @@ public:
 		return e;
 	}
 	void Add(Entity*);
-	void UpdateAll();
+	void UpdateAll(float);
 	void DrawAll();
 	~EntityManager();
 private:

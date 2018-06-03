@@ -10,7 +10,7 @@ MovingEntity::~MovingEntity()
 {
 }
 
-void MovingEntity::MoveBasedOnVelocity()
+void MovingEntity::MoveBasedOnVelocity(float deltaTime)
 {
 	//Acceleration
 	sf::Vector2f nextVelocity = velocity + acceleration;
@@ -24,7 +24,7 @@ void MovingEntity::MoveBasedOnVelocity()
 		velocity = Util::Vector2fNormalize(nextVelocity) * maxSpeed;
 	}
 
-	shape->move(velocity);
+	shape->move(velocity * deltaTime);
 
 	//Friction
 	if (Util::Vector2fIsZero(acceleration)) { 
