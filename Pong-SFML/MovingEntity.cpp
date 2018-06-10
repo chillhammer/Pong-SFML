@@ -29,7 +29,7 @@ void MovingEntity::MoveBasedOnVelocity(float deltaTime)
 	//Friction
 	if (Util::Vector2fIsZero(acceleration)) { 
 		velocity -= Util::Vector2fNormalize(velocity) * friction;
-		if (Util::Vector2fIsZero(velocity) <= friction)
+		if (Util::Vector2fLength(velocity) <= friction)
 			velocity = sf::Vector2f(0, 0);;
 	}
 	else {

@@ -137,7 +137,9 @@
     <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Pong.cpp" />
+    <ClCompile Include="StaticEntity.cpp" />
     <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -146,7 +148,9 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="StaticEntity.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="Wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

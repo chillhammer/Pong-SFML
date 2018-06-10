@@ -1,7 +1,11 @@
 #include <algorithm>
+#include "Ball.h"
+#include "EntityManager.h"
 #include "Game.h"
 #include "Paddle.h"
 #include "SFML\Graphics.hpp"
+#include <functional>
+#include <iostream>
 
 
 
@@ -14,8 +18,10 @@ Paddle::Paddle() : accSpeed(2.f), MovingEntity()
 	shape->setPosition(20.f, 10.f);
 	shape->setOrigin(7.5f, 30.f);
 	//Setting Physics Variables
-	maxSpeed = 250.f;
-	friction = 0.1f;
+	maxSpeed = 275.f;
+	friction = 2.f;
+
+	SetPaddleType(Player);
 }
 
 
@@ -26,14 +32,16 @@ Paddle::~Paddle()
 
 void Paddle::Update(float deltaTime) {
 
-	//Input
-	int up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) || 
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? 1 : 0;
-	int down = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) || 
-		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1 : 0;
-	int moveVer = down - up;
+	//Calls Appropriate Input Function
+	int moveVer = std::invoke(Input, this);
 
 	acceleration = sf::Vector2f(0, moveVer * accSpeed);
+
+	//Reset Velocity
+	if (acceleration.y > 0 && velocity.y < 0 ||
+		acceleration.y < 0 && velocity.y > 0) {
+		velocity = sf::Vector2f(0.f, 0.f);
+	}
 
 	//Move
 	MoveBasedOnVelocity(deltaTime);
@@ -46,4 +54,46 @@ void Paddle::Update(float deltaTime) {
 	float bottomY = Game::HEIGHT - pad - halfHeight;
 	float newY = std::max(topY, std::min(bottomY, currentY));
 	shape->setPosition(shape->getPosition().x, newY);
+}
+
+sf::Vector2f Paddle::GetHalfExtents()
+{
+	return sf::Vector2f(shape->getGlobalBounds().width, shape->getGlobalBounds().height);
+}
+
+void Paddle::SetPaddleType(Control type)
+{
+	paddleType = type;
+	switch (type) {
+		case Player:
+			Input = &Paddle::PlayerInput;
+			break;
+		case Enemy:
+			Input = &Paddle::EnemyInput;
+			break;
+	}
+}
+
+int Paddle::PlayerInput()
+{
+	//Input
+	int up = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) ? 1 : 0;
+	int down = sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) ||
+		sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) ? 1 : 0;
+	return down - up;
+}
+
+int Paddle::EnemyInput()
+{
+	//Find Ball
+	Entity* ball = EntMgr.FindFirstOfType<Ball*>();
+
+	if (ball != nullptr) {
+		float ballY = ball->GetPosition().y;
+		float y = GetPosition().y;
+		if (y > ballY) return -1;
+		if (y < ballY) return 1;
+	}
+	return 0;
 }

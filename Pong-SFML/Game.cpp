@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "EntityManager.h"
 #include <SFML\Graphics.hpp>
 
 const int Game::HEIGHT = 480;
@@ -45,3 +46,11 @@ void Game::Draw()
 
 	window.display();
 }
+
+void Game::Destroy(Entity * entity)
+{
+	EntMgr.Remove(entity);
+	delete entity;
+}
+
+
